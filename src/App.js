@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const books =[
+const tempBooks =[
   {
     _id: "5b44068383a77200144a45d3",
     title: "Around the World in 80 Days",
     author: "Jules Verne",
-    image: `http://cloud.githubusercontent.com/assets/7833470/10892118/865bee3e-8156-11e5-9634-cd7bcd3d6d4f.jpg`,
+    image: `https://m.media-amazon.com/images/M/MV5BNjRhNjVlYTgtODZiOS00OTVhLWE4ZTItZjc3MTFiYWY1YjI5L2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_UX182_CR0,0,182,268_AL_.jpg`,
     releaseDate: "January 30, 1873"
   }, {
     _id: "5b44068383a77200144a45d4",
@@ -25,7 +25,7 @@ const books =[
 
 // TODO:
 //    Single Truth / Controlled Components
-//    componentDidMount()
+//    componentDidMount()() {}
 //    list keys
 
 /*
@@ -63,7 +63,7 @@ function Button(props) {
 function TitleRow(props) {
   /* jshint ignore:start */
   return (
-    <h5 className="card-title mt-2">Around the world in 80 days</h5>
+    <h5 className="card-title mt-2">{props.title}</h5>
   );
   /* jshint ignore:end */
 }
@@ -72,7 +72,7 @@ function AuthorRow(props) {
   /* jshint ignore:start */
   return (
     <h6 className="card-subtitle mb-2 text-muted">
-      Jules Verne
+      {props.author}
     </h6>
   );
   /* jshint ignore:end */
@@ -82,7 +82,7 @@ function ReleaseDateRow(props) {
   /* jshint ignore:start */
   return (
     <p className="card-text">
-      Janurary 30, 1873
+      {props.releaseDate}
     </p>
   );
   /* jshint ignore:end */
@@ -93,20 +93,30 @@ function CardImg(props) {
   return(
     <img
       className="card-img-top"
-      src='https://cloud.githubusercontent.com/assets/7833470/10892118/865bee3e-8156-11e5-9634-cd7bcd3d6d4f.jpg'
-      alt="Image of Around the World in 80 Days"
+      src={props.image}
+      alt={props.alt}
     />
   )
   /* jshint ignore:end */
 }
 
 class Card extends Component {
+ // constructor(props){
+ //    super(props);
+ //  }
   /* jshint ignore:start */
   render(){
     return (
       <div className="card mb-5" style={{width:"18rem"}}>
-        <CardImg />
-        <InfoTable />
+        <CardImg
+          image={this.props.image}
+          alt={this.props.title}
+        />
+        <InfoTable
+          title={this.props.title}
+          author={this.props.author}
+          releaseDate={this.props.releaseDate}
+        />
         <ButtonRow />
       </div>
     );
@@ -116,13 +126,23 @@ class Card extends Component {
 }
 
 class InfoTable extends Component {
+  // constructor(props){
+    // super(props);
+  // }
+
   /* jshint ignore:start */
   render(){
     return (
       <div className="container" data-cardtext-id="123">
-        <TitleRow />
-        <AuthorRow />
-        <ReleaseDateRow />
+        <TitleRow
+          title={this.props.title}
+        />
+        <AuthorRow
+          author={this.props.author}
+        />
+        <ReleaseDateRow
+          releaseDate={this.props.releaseDate}
+        />
       </div>
     );
   }
@@ -133,45 +153,89 @@ class ButtonRow extends Component {
   /* jshint ignore:start */
   render(){
     return(
-      <div className="container">
-        <Button className="btn-primary rounded" value="Edit"/>
-        <Button className="btn-danger rounded" value="Delete"/>
+      <div className="container mb-4 mt-2">
+        <Button className="btn-primary rounded mr-2" value="Edit"/>
+        <Button className="btn-danger rounded  ml-2" value="Delete"/>
       </div>
     );
   }
   /* jshint ignore:end */
 }
 
-
-
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      books: []
+    };
+
+    this.renderCard = this.renderCard.bind('this');
+  }
+
   /* jshint ignore:start */
-  renderCard(i){
+  renderCard(book){
     return (
       <Card
-
+        image={book.image}
+        title={book.title}
+        author={book.author}
+        releaseDate={book.releaseDate}
       />
     )
   }
 
+  componentDidMount() {
+    fetch(`https://quiet-ravine-87109.herokuapp.com/books`)
+      .then( res => res.json())
+      .then(result => {
+        this.setState({
+          isLoaded: true,
+          books: result.books
+        })
+      },
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        })
+    })
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to Mute Books</h1>
-        </header>
+    const { error, isLoaded, books } = this.state;
 
-        <ul className="list-unstyled text-center list-group col">
-          {books.map(book => {
-            return (
-              <li>
-                <Card />
-              </li>
-            )})}
-        </ul>
+    if (error) {
+      return <div>Error {error.message}</div>
+    } else if (!isLoaded) {
+      return <div>Loading...</div>
+    } else {
 
-      </div>
-    );
+      return (
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">Welcome to Mute Books</h1>
+          </header>
+
+          <ul className="list-unstyled text-center list-group col">
+            {
+              books.map(book => {
+              return (
+                <li key={book._id}>
+                  {this.renderCard({
+                    image: book.image,
+                    title: book.title,
+                    author: book.author,
+                    releaseDate: book.releaseDate,
+                  })}
+                </li>
+              )}
+            )}
+          </ul>
+        </div>
+      );
+    }
   }
   /* jshint ignore:end */
 }
