@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 // TODO:
-//    Save Button
 //    Button Switch
 //    Edit Book Form
 //    Edit Book
@@ -63,25 +62,127 @@ function CardImg(props) {
   //jshint ignore:end
 }
 
-class Card extends Component {
- // constructor(props){
- //    super(props);
- //  }
+function CardInfo(props){
+    //jshint ignore:start
+    return(
+
+      <div>
+        <InfoTable
+          title={props.title}
+          author={props.author}
+          releaseDate={props.releaseDate}
+        />
+
+        <EditForm
+          title={props.title}
+          author={props.author}
+          releaseDate={props.releaseDate}
+        />
+      </div>
+    )
+    //jshint ignore:end
+}
+
+class EditForm extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      title: '',
+      author: '',
+      releaseDate: ''
+    };
+
+    this.handelChange = this.handelChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handelChange(event) {
+    const name = event.target.name;
+    this.setState({
+      [name]: event.target.value
+    });
+  }
+
+ handleSubmit(event) {
+    alert('Something was submitted: ' + this.state);
+    event.preventDefault();
+  }
 
   render(){
     //jshint ignore:start
     return (
-          <div className="card mb-5" style={{width:"18rem"}}>
+      <form className="edit-form" data-edit-id="TODO">
+        <div className="form-group">
+          <label htmlFor="book-title">
+            Book Title
+          </label>
+          <input
+            name="title"
+            type="text"
+            autoComplete="title"
+            className="form-control"
+            id="book-title"
+            placeholder="this is a placeholder"
+            value={this.state.title}
+            onChange={this.handelChange}
+            />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="book-author">
+            Author
+          </label>
+
+          <input
+            name="author"
+            type="text"
+            autoComplete="author"
+            className="form-control"
+            id="book-author"
+            placeholder="this is a placeholder"
+            value={this.state.author}
+            onChange={this.handelChange}
+          />
+
+          <div className="form-group">
+            <label htmlFor="book-releasedate">
+              Book Title
+            </label>
+
+            <input
+              name="releaseDate"
+              type="text"
+              autoComplete="date"
+              className="form-control"
+              id="book-releasedate"
+              placeholder="this is a placeholder"
+              value={this.state.releaseDate}
+              onChange={this.handelChange}
+            />
+          </div>
+        </div>
+      </form>
+    )
+    //jshint ignore:end
+  }
+
+}
+
+class Card extends Component {
+  render(){
+    //jshint ignore:start
+    return (
+          <div className="card mb-4" style={{width:"18rem"}}>
             <CardImg
               image={this.props.image}
               alt={this.props.title}
             />
-            <InfoTable
+            <CardInfo
               title={this.props.title}
               author={this.props.author}
-              releaseDate={this.props.releaseDate}
-            />
+              releaseDate={this.props.releaseDate}/>
             <ButtonRow />
+
           </div>
         );
     //jshint ignore:end
@@ -90,10 +191,6 @@ class Card extends Component {
 }
 
 class InfoTable extends Component {
-  // constructor(props){
-    // super(props);
-  // }
-
   render(){
     //jshint ignore:start
     return (
@@ -117,9 +214,10 @@ class ButtonRow extends Component {
   render(){
     //jshint ignore:start
     return(
-          <div className="container mb-4 mt-2">
-            <Button className="btn-primary rounded mr-2" value="Edit"/>
-            <Button className="btn-danger rounded  ml-2" value="Delete"/>
+          <div className="container mb-2 mt-3">
+            <Button className="btn btn-info mr-2 mb-2" data-id="TODO" value="Edit"/>
+            <Button className="btn btn-success mr-2 mb-2 d-none" data-id="TODO" value="Save"/>
+            <Button className="btn btn-danger ml-2 mb-2" data-id="TODO" value="Delete"/>
           </div>
         );
     //jshint ignore:end
@@ -127,7 +225,6 @@ class ButtonRow extends Component {
 }
 
 class NewBookForm extends Component {
-
   render(){
     //jshint ignore:start
     return(
@@ -136,31 +233,31 @@ class NewBookForm extends Component {
                 <h4>Add a Book</h4>
                 <form id="new-book-form">
                   <div className="form-group">
-                    <label for="newBookTitle">Book Title</label>
+                    <label htmlFor="newBookTitle">Book Title</label>
                     <input name="title" type="text" className="form-control" id="newBookTitle" placeholder="The name of the wind" aria-describedby="newBookHelp"/>
                     <small id="newBookHelp" className="form-text text-muted">Enter the title of a new book</small>
                   </div>
 
                   <div className="form-group">
-                    <label for="newBookAuthor">Author</label>
-                    <input name="author" type="text" class="form-control" id="newBookAuthor" placeholder="Ex: Patrick Rothfuss" aria-describedby="newBookAuthorHelp" />
-                    <small id="newBookAuthorHelp" class="form-text text-muted">Full name of the Author(s)</small>
+                    <label htmlFor="newBookAuthor">Author</label>
+                    <input name="author" type="text" className="form-control" id="newBookAuthor" placeholder="Ex: Patrick Rothfuss" aria-describedby="newBookAuthorHelp" />
+                    <small id="newBookAuthorHelp" className="form-text text-muted">Full name of the Author(s)</small>
                   </div>
 
                   <div className="form-group">
-                    <label for="newBookImg">Image</label>
-                    <input name="image" type="text" class="form-control" id="newBookImg" placeholder="Ex: https://images-na.ssl-images-amazon.com/images/I/51MUF7bj-lL._SY346_.jpg" aria-describedby="newBookImgHelp" />
-                    <small id="newBookImgHelp" class="form-text text-muted">Link to book graphic</small>
+                    <label htmlFor="newBookImg">Image</label>
+                    <input name="image" type="text" className="form-control" id="newBookImg" placeholder="Ex: https://images-na.ssl-images-amazon.com/images/I/51MUF7bj-lL._SY346_.jpg" aria-describedby="newBookImgHelp" />
+                    <small id="newBookImgHelp" className="form-text text-muted">Link to book graphic</small>
                   </div>
 
                   <div className="form-group">
-                    <label for="newBookReleaseDate">Image</label>
-                    <input name="releaseDate" type="text" class="form-control" id="newBookReleaseDate" placeholder="Ex: April 1st 2008" aria-describedby="newBookReleaseDateHelp" />
-                    <small id="newBookReleaseDateHelp" class="form-text text-muted">Date Originally Published</small>
+                    <label htmlFor="newBookReleaseDate">Image</label>
+                    <input name="releaseDate" type="text" className="form-control" id="newBookReleaseDate" placeholder="Ex: April 1st 2008" aria-describedby="newBookReleaseDateHelp" />
+                    <small id="newBookReleaseDateHelp" className="form-text text-muted">Date Originally Published</small>
                   </div>
 
-                  <div class="container text-center mb-4">
-                    <button type="submit" class="btn btn-primary new-book-submit">Submit</button>
+                  <div className="container text-center mb-4">
+                    <button type="submit" className="btn btn-primary new-book-submit">Submit</button>
                   </div>
 
                 </form>
