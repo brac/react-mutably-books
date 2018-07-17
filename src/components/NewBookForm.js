@@ -22,6 +22,7 @@ class NewBookForm extends Component {
   }
 
   handleSubmit(event){
+    console.log('I will submit something!')
     event.preventDefault();
   }
 

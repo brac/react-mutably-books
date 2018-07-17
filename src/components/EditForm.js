@@ -8,9 +8,7 @@ class EditForm extends Component {
       author: '',
       releaseDate: '',
     };
-
     this.handelChange = this.handelChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handelChange(event) {
@@ -18,11 +16,6 @@ class EditForm extends Component {
     this.setState({
       [name]: event.target.value
     });
-  }
-
- handleSubmit(event) {
-    alert('Something was submitted: ' + this.state);
-    event.preventDefault();
   }
 
   render(){
@@ -80,7 +73,6 @@ class EditForm extends Component {
     )
     //jshint ignore:end
   }
-
 }
 
 export default EditForm;

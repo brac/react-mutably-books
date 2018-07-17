@@ -17,7 +17,7 @@ class App extends Component {
     return (
           <div className="App">
             <header className="App-header">
-              <h1 className="App-title">Welcome to Mute Books</h1>
+              <h1 className="App-title text-center mt-3">Welcome to The Book Bank</h1>
             </header>
             <div className="container ">
               <div className="row">

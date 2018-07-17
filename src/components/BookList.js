@@ -17,6 +17,7 @@ class BookList extends Component {
     //jshint ignore:start
     return (
           <Card
+            _id={book._id}
             image={book.image}
             title={book.title}
             author={book.author}
