@@ -15,7 +15,7 @@ import './App.css';
 function Button(props) {
   // jshint ignore:start
   return (
-    <button className={props.className}>
+    <button className={props.className} onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -111,7 +111,7 @@ class EditForm extends Component {
   render(){
     //jshint ignore:start
     return (
-      <form className="edit-form" data-edit-id="TODO">
+      <form className="edit-form d-none" data-edit-id="TODO">
 
         <div className="form-group">
           <label htmlFor="book-title">
@@ -210,11 +210,29 @@ class InfoTable extends Component {
 }
 
 class ButtonRow extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isSave: null,
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(){
+    console.log('setting a thing');
+
+    this.setState(prevState => ({
+      isSave: !prevState.isSave
+    }));
+  }
+
+
   render(){
     //jshint ignore:start
     return(
           <div className="container mb-2 mt-3">
-            <Button className="btn btn-info mr-2 mb-2" data-id="TODO" value="Edit"/>
+            <Button className="btn btn-info mr-2 mb-2" data-id="TODO" value="Edit" onClick={this.handleClick}/>
             <Button className="btn btn-success mr-2 mb-2 d-none" data-id="TODO" value="Save"/>
             <Button className="btn btn-danger ml-2 mb-2" data-id="TODO" value="Delete"/>
           </div>
