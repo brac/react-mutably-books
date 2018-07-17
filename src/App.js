@@ -89,7 +89,7 @@ class EditForm extends Component {
     this.state = {
       title: '',
       author: '',
-      releaseDate: ''
+      releaseDate: '',
     };
 
     this.handelChange = this.handelChange.bind(this);
@@ -123,7 +123,7 @@ class EditForm extends Component {
             autoComplete="title"
             className="form-control"
             id="book-title"
-            placeholder="this is a placeholder"
+            placeholder={this.props.title}
             value={this.state.title}
             onChange={this.handelChange}
           />
@@ -139,7 +139,7 @@ class EditForm extends Component {
             autoComplete="author"
             className="form-control"
             id="book-author"
-            placeholder="this is a placeholder"
+            placeholder={this.props.author}
             value={this.state.author}
             onChange={this.handelChange}
           />
@@ -155,7 +155,7 @@ class EditForm extends Component {
             autoComplete="date"
             className="form-control"
             id="book-releasedate"
-            placeholder="this is a placeholder"
+            placeholder={this.props.releaseDate}
             value={this.state.releaseDate}
             onChange={this.handelChange}
           />
