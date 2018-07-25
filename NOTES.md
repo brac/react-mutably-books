@@ -1,3 +1,16 @@
+TODO:
+- Edit Book
+  - Capture inputed data on Save button click
+- Delete Book
+  - send DELETE request to server
+- Create Book
+  - send PUT request to server
+- Code Review
+- License
+- Production Build
+- Deploy to Heroku
+
+
 # How did you get bootstrap to work with React?
 I installed both dependencies locally:
 ```bash
@@ -12,7 +25,7 @@ import Popper from 'popper.js';
 ```
 
 # How do you handle multiple inputs on a sinlge component?
-You give each input a unique name, then use `event.target.name` to determine which input element has data going into to. Then on your `handleChange()` helper method you can write it like so:
+You give each input a unique name, then use `event.target.name` to determine which input element has data going into to it. Then on your `handleChange()` helper method you can write it like so:
 ```javascript
 handelChange(event) {
   const name = event.target.name;

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
+import logo from './logo.svg';
 import './App.css';
 import NewBookForm from './components/NewBookForm'
 import BookList from './components/BookList'
-
-// TODO:
-//    Edit Book
-//    Single Truth / Controlled Components
-//    Delete Book
-//    Create Book
-//    Code Review
-//    Deploy to Heroku
 
 class App extends Component {
   render() {
@@ -27,6 +20,10 @@ class App extends Component {
 
               </div>
             </div>
+            <footer className="App-footer">
+              <h1 className="App-title text-center">Created with React</h1>
+              <img src={logo} className="App-logo" alt="logo" />
+            </footer>
           </div>
         );
     //jshint ignore:end

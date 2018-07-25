@@ -13,6 +13,10 @@ class CardInfo extends Component {
   }
 
   handleClick(event){
+    if (this.state.showEditForm) {
+      console.log(`Gonna save something to ${this.props._id}`)
+    }
+
     this.setState(prevState => ({
       showEditForm: !prevState.showEditForm
     }));

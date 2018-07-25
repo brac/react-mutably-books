@@ -68,6 +68,7 @@ class BookList extends Component {
                   return (
                     <li key={book._id}>
                       {this.renderCard({
+                        _id: book._id,
                         image: book.image,
                         title: book.title,
                         author: book.author,

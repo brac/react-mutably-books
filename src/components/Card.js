@@ -11,6 +11,7 @@ function Card(props) {
       />
 
       <CardInfo
+        _id={props._id}
         title={props.title}
         author={props.author}
         releaseDate={props.releaseDate}
