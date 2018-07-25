@@ -10,21 +10,21 @@ function ButtonRow(props) {
           className="btn btn-success mr-2 mb-2"
           data-id="TODO"
           value="Save"
-          handleClick={props.handleClick}
+          handleClick={props.handleSave}
         /> :
         <Button
           className="btn btn-info mr-2 mb-2"
           data-id="TODO"
           value="Edit"
           name="edit-btn"
-          handleClick={props.handleClick}
+          handleClick={props.handleEdit}
         />
       }
-
       <Button
         className="btn btn-danger ml-2 mb-2"
         data-id="TODO"
         value="Delete"
+        handleClick={props.handleDelete}
       />
     </div>
   );
