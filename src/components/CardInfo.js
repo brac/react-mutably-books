@@ -8,6 +8,8 @@ class CardInfo extends Component {
     super(props)
 
     this.state = {
+      _id: props._id,
+      image: props.image,
       title: props.title,
       author: props.author,
       releaseDate: props.releaseDate,
@@ -28,29 +30,49 @@ class CardInfo extends Component {
   }
 
   handleEdit(event){
-    console.log(`
-      Gonna edit something with id:
-      ${this.props._id}
-    `)
-
     this.setState(prevState => ({
       showEditForm: !prevState.showEditForm
     }));
   }
 
   handleSave(event){
-    console.log(`
-      I will save something with id:
-      ${this.props._id}
-    `)
+    const data = this.state
+    const url = `https://quiet-ravine-87109.herokuapp.com/books/${data._id}`
+
+    let fetchData = {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: new Headers({'Content-Type': 'application/json'})
+    }
+
+    fetch(url, fetchData)
+      .then(validateResponse)
+      .then(readResponseAsJSON)
+      .then(logResponse)
+      .catch(logError)
+
+    function logError(error){
+      console.error(error)
+    }
+
+    function readResponseAsJSON(response) {
+      return response.json();
+    }
+
+    function logResponse(result){
+      return console.log(`Successfully edited id: ${result._id}`)
+    }
+
+    function validateResponse(response) {
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+      return response
+    }
 
     this.setState(prevState => ({
-      showEditForm: !prevState.showEditForm
+      showEditForm: !prevState.showEditForm,
     }));
-
-    console.log(this.state.title)
-    console.log(this.state.author)
-    console.log(this.state.releaseDate)
   }
 
   handleDelete(event){

@@ -14,6 +14,7 @@ function Card(props) {
         _id={props._id}
         title={props.title}
         author={props.author}
+        image={props.image}
         releaseDate={props.releaseDate}
       />
       </div>

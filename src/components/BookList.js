@@ -6,6 +6,7 @@ class BookList extends Component {
     super(props);
     this.state = {
       error: null,
+      reload: false,
       isLoaded: false,
       books: []
     };
@@ -62,22 +63,22 @@ class BookList extends Component {
 
       //jshint ignore:start
       return(
-              <ul className="list-unstyled text-center list-group col">
-                {
-                  books.map(book => {
-                  return (
-                    <li key={book._id}>
-                      {this.renderCard({
-                        _id: book._id,
-                        image: book.image,
-                        title: book.title,
-                        author: book.author,
-                        releaseDate: book.releaseDate,
-                      })}
-                    </li>
-                )})}
-              </ul>
-            )
+        <ul className="list-unstyled text-center list-group col">
+          {
+            books.map(book => {
+            return (
+              <li key={book._id}>
+                {this.renderCard({
+                  _id: book._id,
+                  title: book.title,
+                  author: book.author,
+                  image: book.image,
+                  releaseDate: book.releaseDate,
+                })}
+              </li>
+          )})}
+        </ul>
+      )
       //jshint ignore:end
     }
   }
