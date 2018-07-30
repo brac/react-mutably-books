@@ -1,7 +1,7 @@
 TODO:
 - Reset DB
   * functionality
-  - Center Button
+  * Center Button
   - Reload Book List / App
 - Edit Book
   * Capture inputed data on Save button click

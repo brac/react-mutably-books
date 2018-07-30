@@ -13,7 +13,9 @@ class CardInfo extends Component {
       title: props.title,
       author: props.author,
       releaseDate: props.releaseDate,
+
       showEditForm: false,
+      editSuccess: false,
     };
 
     this.handleEdit = this.handleEdit.bind(this);
@@ -55,16 +57,17 @@ class CardInfo extends Component {
       console.error(error)
     }
 
+    function logResponse(result){
+      console.log('Successfully edited')
+    }
+
     function readResponseAsJSON(response) {
       return response.json();
     }
 
-    function logResponse(result){
-      return console.log(`Successfully edited id: ${result._id}`)
-    }
-
     function validateResponse(response) {
       if (!response.ok) {
+
         throw Error(response.statusText)
       }
       return response
@@ -88,9 +91,9 @@ class CardInfo extends Component {
       <div>
         {this.state.showEditForm ?
           <EditForm
-            title={this.state.title}
-            author={this.state.author}
-            releaseDate={this.state.releaseDate}
+            title={this.props.title}
+            author={this.props.author}
+            releaseDate={this.props.releaseDate}
             handleChange={this.handleChange}
           /> :
           <InfoTable

@@ -7,6 +7,8 @@ class InfoTable extends Component {
 
 
   render(){
+    if (this.props.editSuccess) {console.log('true')}
+
     //jshint ignore:start
     return (
           <div className="container" data-cardtext-id="123">

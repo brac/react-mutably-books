@@ -5,14 +5,26 @@ import NewBookForm from './components/NewBookForm'
 import BookList from './components/BookList'
 
 class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      reload: false,
+    }
+
+    this.handleReset = this.handleReset.bind(this)
+  }
+
   handleReset(){
     const url = "https://quiet-ravine-87109.herokuapp.com/reset"
 
     fetch(url, {method: 'POST'})
       .then(() => {
-        console.log('DB Reset')
-
+        this.setState(prevState => ({
+          reload: !prevState.reload
+        }));
       })
+
   }
 
   render() {
@@ -21,19 +33,22 @@ class App extends Component {
           <div className="App">
             <header className="App-header">
               <h1 className="App-title text-center mt-3">Welcome to The Book Bank</h1>
-              <button
-                type="button"
-                className="resetBtn btn btn-primary"
-                onClick={this.handleReset}
-              >
-                Reset DB
-              </button>
-
+              <div className='d-flex justify-content-center '>
+                <button
+                  type="button"
+                  className="resetBtn btn btn-primary mt-3"
+                  onClick={this.handleReset}
+                >
+                  Reset DB
+                </button>
+              </div>
             </header>
             <div className="container ">
               <div className="row">
 
-                <BookList />
+                <BookList
+                  reload={this.state.reload}
+                />
                 <NewBookForm />
 
               </div>

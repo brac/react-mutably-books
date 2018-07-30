@@ -6,16 +6,15 @@ class BookList extends Component {
     super(props);
     this.state = {
       error: null,
-      reload: false,
       isLoaded: false,
       books: []
     };
-
     this.renderCard = this.renderCard.bind('this');
   }
 
   renderCard(book){
     //jshint ignore:start
+
     return (
           <Card
             _id={book._id}
