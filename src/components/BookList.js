@@ -9,22 +9,29 @@ class BookList extends Component {
       isLoaded: false,
       books: []
     };
+
     this.renderCard = this.renderCard.bind('this');
+    this.handleDelete = this.handleDelete.bind('this');
+  }
+
+  handleDelete(){
+    console.log('what')
+    this.setState({
+      books: [],
+    })
   }
 
   renderCard(book){
-    //jshint ignore:start
-
     return (
-          <Card
-            _id={book._id}
-            image={book.image}
-            title={book.title}
-            author={book.author}
-            releaseDate={book.releaseDate}
-          />
-        )
-    //jshint ignore:end
+      <Card
+        _id={book._id}
+        image={book.image}
+        title={book.title}
+        author={book.author}
+        releaseDate={book.releaseDate}
+        handleDelete={book.handleDelete}
+      />
+    )
   }
 
   componentDidMount() {
@@ -49,18 +56,14 @@ class BookList extends Component {
     const { error, isLoaded, books } = this.state;
 
     if (error) {
-      //jshint ignore:start
       return(
         <div>Error {error.message}</div>
       );
-      //jshint ignore:end
-    } else if (!isLoaded) {
-      //jshint ignore:start
-      return <div style={{width:"18rem"}}>Loading...</div>
-      //jshint ignore:end
-    } else {
 
-      //jshint ignore:start
+    } else if (!isLoaded) {
+      return <div style={{width:"18rem"}}>Loading...</div>
+
+    } else {
       return(
         <ul className="list-unstyled text-center list-group col">
           {
@@ -73,12 +76,12 @@ class BookList extends Component {
                   author: book.author,
                   image: book.image,
                   releaseDate: book.releaseDate,
+                  handleDelete: this.handleDelete
                 })}
               </li>
           )})}
         </ul>
       )
-      //jshint ignore:end
     }
   }
 }

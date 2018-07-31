@@ -11,7 +11,6 @@ class App extends Component {
     this.state = {
       reload: false,
     }
-
     this.handleReset = this.handleReset.bind(this)
   }
 
@@ -24,7 +23,6 @@ class App extends Component {
           reload: !prevState.reload
         }));
       })
-
   }
 
   render() {
@@ -46,9 +44,7 @@ class App extends Component {
             <div className="container ">
               <div className="row">
 
-                <BookList
-                  reload={this.state.reload}
-                />
+                <BookList />
                 <NewBookForm />
 
               </div>

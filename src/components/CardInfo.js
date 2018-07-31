@@ -8,20 +8,17 @@ class CardInfo extends Component {
     super(props)
 
     this.state = {
-      _id: props._id,
       image: props.image,
       title: props.title,
       author: props.author,
       releaseDate: props.releaseDate,
-
       showEditForm: false,
-      editSuccess: false,
     };
 
+    this.url = `https://quiet-ravine-87109.herokuapp.com/books/${this.props._id}`
     this.handleEdit = this.handleEdit.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange(event) {
@@ -39,7 +36,6 @@ class CardInfo extends Component {
 
   handleSave(event){
     const data = this.state
-    const url = `https://quiet-ravine-87109.herokuapp.com/books/${data._id}`
 
     let fetchData = {
       method: 'PUT',
@@ -47,13 +43,13 @@ class CardInfo extends Component {
       headers: new Headers({'Content-Type': 'application/json'})
     }
 
-    fetch(url, fetchData)
+    fetch(this.url, fetchData)
       .then(validateResponse)
       .then(readResponseAsJSON)
       .then(logResponse)
       .catch(logError)
 
-    function logError(error){
+    function logError (error){
       console.error(error)
     }
 
@@ -67,7 +63,6 @@ class CardInfo extends Component {
 
     function validateResponse(response) {
       if (!response.ok) {
-
         throw Error(response.statusText)
       }
       return response
@@ -76,13 +71,6 @@ class CardInfo extends Component {
     this.setState(prevState => ({
       showEditForm: !prevState.showEditForm,
     }));
-  }
-
-  handleDelete(event){
-    console.log(`
-      I will delete something with id:
-      ${this.props._id}
-    `)
   }
 
   render(){
@@ -106,7 +94,7 @@ class CardInfo extends Component {
             showEditForm={this.state.showEditForm}
             handleEdit={this.handleEdit}
             handleSave={this.handleSave}
-            handleDelete={this.handleDelete}
+            handleDelete={this.props.handleDelete}
           />
       </div>
     )

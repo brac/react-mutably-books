@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+// import React from 'react';
 
-function Button(props) {
-  // jshint ignore:start
-  return (
-    <button className={props.className} onClick={props.handleClick} name={props.name}>
-      {props.value}
-    </button>
-  );
-  // jshint ignore:end
+class Button extends Component {
+  render(){
+    return (
+      <button className={this.props.className} onClick={this.props.handleClick} name={this.props.name}>
+        {this.props.value}
+      </button>
+    );
+  }
 }
 
 export default Button;
