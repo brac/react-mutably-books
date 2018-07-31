@@ -16,9 +16,9 @@ class BookList extends Component {
 
   handleDelete(){
     console.log('what')
-    this.setState({
-      books: [],
-    })
+    // this.setState({
+    //   books: [],
+    // })
   }
 
   renderCard(book){
