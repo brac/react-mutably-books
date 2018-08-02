@@ -1,3 +1,5 @@
+// jshint asi:true
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -15,7 +17,7 @@ class App extends Component {
   }
 
   handleReset(){
-    const url = "https://quiet-ravine-87109.herokuapp.com/reset"
+    const url = `https://quiet-ravine-87109.herokuapp.com/reset`
 
     fetch(url, {method: 'POST'})
       .then(() => {
@@ -36,8 +38,7 @@ class App extends Component {
                   type="button"
                   className="resetBtn btn btn-primary mt-3"
                   onClick={this.handleReset}
-                >
-                  Reset DB
+                >Reset DB
                 </button>
               </div>
             </header>
