@@ -11,8 +11,6 @@ class BookList extends Component {
     this.renderCard = this.renderCard.bind('this');
   }
 
-
-
   renderCard(book){
 //jshint ignore:start
     return (
@@ -50,7 +48,7 @@ class BookList extends Component {
                     author: book.author,
                     image: book.image,
                     releaseDate: book.releaseDate,
-                    handleDelete: this.handleDelete
+                    handleDelete: this.props.handleDelete
                   })}
                 </li>
             )})}

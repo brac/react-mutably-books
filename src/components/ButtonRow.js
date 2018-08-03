@@ -1,3 +1,5 @@
+// jshint asi:true
+
 import React, { Component } from 'react';
 // import React from 'react';
 import Button from './Button'
@@ -10,13 +12,11 @@ class ButtonRow extends Component {
           {this.props.showEditForm ?
             <Button
               className="btn btn-success mr-2 mb-2"
-              _id="TODO"
               value="Save"
               handleClick={this.props.handleSave}
             /> :
             <Button
               className="btn btn-info mr-2 mb-2"
-              _id="TODO"
               value="Edit"
               name="edit-btn"
               handleClick={this.props.handleEdit}
@@ -24,7 +24,7 @@ class ButtonRow extends Component {
           }
           <Button
             className="btn btn-danger ml-2 mb-2"
-            _id="TODO"
+            _id={this.props._id}
             value="Delete"
             handleClick={this.props.handleDelete}
           />

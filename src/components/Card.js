@@ -1,3 +1,5 @@
+// jshint asi:true
+
 import React, { Component } from 'react';
 // import React from 'react';
 import CardImg from './CardImg'
@@ -5,6 +7,7 @@ import CardInfo from './CardInfo'
 
 class Card extends Component{
   render(){
+    // jshint ignore:start
     return (
       <div className="card mb-4" style={{width:"18rem"}}>
         <CardImg

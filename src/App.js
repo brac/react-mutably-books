@@ -17,6 +17,7 @@ class App extends Component {
     }
     this.handleReset = this.handleReset.bind(this)
     this.getAllBooks = this.getAllBooks.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   getAllBooks(){
@@ -27,6 +28,10 @@ class App extends Component {
     }, (error) => {
       return error
     })
+  }
+
+  handleDelete(id){
+    console.log(`You passed this id: ${id}`)
   }
 
   handleReset(){
@@ -82,6 +87,7 @@ class App extends Component {
                   books={this.state.books}
                   isLoaded={this.state.isLoaded}
                   error={this.state.error}
+                  handleDelete={this.handleDelete}
                 />
                 <NewBookForm />
 

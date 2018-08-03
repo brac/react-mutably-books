@@ -1,3 +1,5 @@
+// jshint asi:true
+
 import React, { Component } from 'react';
 import InfoTable from './InfoTable'
 import EditForm from './EditForm'
@@ -95,6 +97,7 @@ class CardInfo extends Component {
             handleEdit={this.handleEdit}
             handleSave={this.handleSave}
             handleDelete={this.props.handleDelete}
+            _id={this.props._id}
           />
       </div>
     )
