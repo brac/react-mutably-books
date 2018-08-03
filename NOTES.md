@@ -45,3 +45,12 @@ handelChange(event) {
   });
 }
 ```
+
+From Mo:
+Lift state from bookList to the App.js to get ResetDB working
+
+Implement handlDelet to App.js, pass book data and handle delete function.
+
+In BookList, if !props.books, then loading if not then populate the list
+setState in booksList to delete the book
+

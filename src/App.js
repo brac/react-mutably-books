@@ -11,19 +11,52 @@ class App extends Component {
     super(props)
 
     this.state = {
-      reload: false,
+      books: [],
+      isLoaded: false,
+      error: null,
     }
     this.handleReset = this.handleReset.bind(this)
+    this.getAllBooks = this.getAllBooks.bind(this)
+  }
+
+  getAllBooks(){
+    return fetch(`https://quiet-ravine-87109.herokuapp.com/books`)
+    .then( res => res.json())
+    .then(result => {
+      return result
+    }, (error) => {
+      return error
+    })
   }
 
   handleReset(){
     const url = `https://quiet-ravine-87109.herokuapp.com/reset`
-
     fetch(url, {method: 'POST'})
       .then(() => {
-        this.setState(prevState => ({
-          reload: !prevState.reload
-        }));
+        this.setState({
+          isLoaded: false,
+        });
+      })
+      .then(() => {
+        this.getAllBooks()
+          .then(books => {
+            this.setState({
+              isLoaded: true,
+              books: books.books,
+              error: books.error,
+            })
+          })
+      })
+  }
+
+  componentDidMount(){
+    this.getAllBooks()
+      .then(books => {
+        this.setState({
+          isLoaded: true,
+          books: books.books,
+          error: books.error,
+        })
       })
   }
 
@@ -45,7 +78,11 @@ class App extends Component {
             <div className="container ">
               <div className="row">
 
-                <BookList />
+                <BookList
+                  books={this.state.books}
+                  isLoaded={this.state.isLoaded}
+                  error={this.state.error}
+                />
                 <NewBookForm />
 
               </div>
