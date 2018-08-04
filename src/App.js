@@ -22,16 +22,41 @@ class App extends Component {
 
   getAllBooks(){
     return fetch(`https://quiet-ravine-87109.herokuapp.com/books`)
-    .then( res => res.json())
-    .then(result => {
-      return result
-    }, (error) => {
-      return error
+      .then( res => res.json())
+      .then(result => {
+        return result
+      }, (error) => {
+        return error
     })
   }
 
   handleDelete(id){
-    console.log(`You passed this id: ${id}`)
+    const url = `https://quiet-ravine-87109.herokuapp.com/books/${id}`
+
+    fetch(url, {method: 'DELETE'})
+      .then(() => {
+        this.setState({
+          isLoaded: false,
+        });
+      })
+      .then(() => {
+        const index = this.state.books.findIndex( book => {
+          return book._id === id
+        })
+
+        this.state.books.splice(index, 1)
+
+        this.setState({
+          isLoaded: true,
+          books: this.state.books
+        })
+
+      }, (error) => {
+        this.setState({
+          isLoaded: true,
+          error: error,
+        })
+    })
   }
 
   handleReset(){
@@ -51,7 +76,12 @@ class App extends Component {
               error: books.error,
             })
           })
-      })
+      }, (error) => {
+        this.setState({
+          isLoaded: true,
+          error: error,
+        })
+    })
   }
 
   componentDidMount(){

@@ -52,7 +52,9 @@ class CardInfo extends Component {
       .catch(logError)
 
     function logError (error){
-      console.error(error)
+      console.error(`Something went wrong with saving,
+       Reload the page or Reset the DB to get back on track
+       ${error}`)
     }
 
     function logResponse(result){

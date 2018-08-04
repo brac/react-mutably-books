@@ -1,14 +1,12 @@
 // jshint asi:true
-import React, { Component } from 'react';
-import Card from './Card';
+import React, { Component } from 'react'
+import Card from './Card'
 
 class BookList extends Component {
   constructor(props){
-    super(props);
-    this.state = {
-    }
+    super(props)
 
-    this.renderCard = this.renderCard.bind('this');
+    this.renderCard = this.renderCard.bind('this')
   }
 
   renderCard(book){
@@ -27,7 +25,7 @@ class BookList extends Component {
   }
 
   render(){
-    const { error, isLoaded, books } = this.props;
+    const { error, isLoaded, books } = this.props
     //jshint ignore:start
     if (error) {
       return( <div>Error {error.message}</div> )
@@ -59,4 +57,4 @@ class BookList extends Component {
   }
 }
 
-export default BookList;
+export default BookList
