@@ -2,16 +2,18 @@ TODO:
 - Reset DB
   * functionality
   * Center Button
-  - Reload Book List / App
+  * Reload Book List / App
 - Edit Book
   * Capture inputed data on Save button click
   * Fetch PUT call to API with _id
   - Success Overlay
   - Working Overlay
-- Delete Book
-  - send DELETE request to server
-  - get All book list to confirm deletion
+* Delete Book
+  * send DELETE request to server
+  * get All book list to confirm deletion
 - Create Book
+  * Controlled Component in newBook
+  - Controlled Component in cardInfo
   - send PUT request to server
     - Retrive created book id?
   - Fetch GET call with book id

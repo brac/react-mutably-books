@@ -12,12 +12,20 @@ class App extends Component {
 
     this.state = {
       books: [],
+      newBook: {
+        title: '',
+        author: '',
+        image: '',
+        releaseDate: '',
+      },
       isLoaded: false,
       error: null,
     }
     this.handleReset = this.handleReset.bind(this)
     this.getAllBooks = this.getAllBooks.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   getAllBooks(){
@@ -28,6 +36,21 @@ class App extends Component {
       }, (error) => {
         return error
     })
+  }
+
+  handleChange(event) {
+    const name = event.target.name;
+    const newBook = this.state.newBook
+    newBook[name] = event.target.value
+
+    this.setState({
+      newBook
+    });
+  }
+
+  handleSubmit(event){
+    event.preventDefault()
+    console.log('I will submit something')
   }
 
   handleDelete(id){
@@ -119,12 +142,16 @@ class App extends Component {
                   error={this.state.error}
                   handleDelete={this.handleDelete}
                 />
-                <NewBookForm />
+                <NewBookForm
+                  book={this.state.newBook}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                />
 
               </div>
             </div>
             <footer className="App-footer">
-              <h1 className="App-title text-center">Created with React</h1>
+              <h1 className="App-title text-center">Built with React</h1>
               <img src={logo} className="App-logo" alt="logo" />
             </footer>
           </div>
