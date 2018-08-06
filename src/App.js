@@ -21,6 +21,9 @@ class App extends Component {
       isLoaded: false,
       error: null,
     }
+
+    this.url = `https://quiet-ravine-87109.herokuapp.com/books`
+
     this.handleReset = this.handleReset.bind(this)
     this.getAllBooks = this.getAllBooks.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
@@ -29,7 +32,7 @@ class App extends Component {
   }
 
   getAllBooks(){
-    return fetch(`https://quiet-ravine-87109.herokuapp.com/books`)
+    return fetch(this.url)
       .then( res => res.json())
       .then(result => {
         return result
@@ -50,11 +53,35 @@ class App extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    console.log('I will submit something')
+
+    fetch(this.url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state.newBook)
+    })
+      .then((res) => {
+        this.setState({ isLoaded: false, })
+        this.getAllBooks()
+          .then((res) => {
+            this.setState({
+              isLoaded: true,
+              books: res.books
+          })
+        })
+      })
+      .catch(error => {
+        this.setState({
+          isLoaded: true,
+          error
+        })
+      })
   }
 
   handleDelete(id){
-    const url = `https://quiet-ravine-87109.herokuapp.com/books/${id}`
+    const url = `${this.url}/${id}`
 
     fetch(url, {method: 'DELETE'})
       .then(() => {
@@ -77,7 +104,7 @@ class App extends Component {
       }, (error) => {
         this.setState({
           isLoaded: true,
-          error: error,
+          error,
         })
     })
   }
@@ -92,11 +119,10 @@ class App extends Component {
       })
       .then(() => {
         this.getAllBooks()
-          .then(books => {
+          .then(res => {
             this.setState({
               isLoaded: true,
-              books: books.books,
-              error: books.error,
+              books: res.books,
             })
           })
       }, (error) => {
@@ -109,11 +135,11 @@ class App extends Component {
 
   componentDidMount(){
     this.getAllBooks()
-      .then(books => {
+      .then(res => {
         this.setState({
           isLoaded: true,
-          books: books.books,
-          error: books.error,
+          books: res.books,
+          error: res.error,
         })
       })
   }
@@ -133,7 +159,7 @@ class App extends Component {
                 </button>
               </div>
             </header>
-            <div className="container ">
+            <div className="container mt-4">
               <div className="row">
 
                 <BookList

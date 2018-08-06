@@ -1,5 +1,5 @@
 TODO:
-- Reset DB
+* Reset DB
   * functionality
   * Center Button
   * Reload Book List / App
@@ -11,13 +11,13 @@ TODO:
 * Delete Book
   * send DELETE request to server
   * get All book list to confirm deletion
-- Create Book
+* Create Book
   * Controlled Component in newBook
-  - Controlled Component in cardInfo
-  - send PUT request to server
-    - Retrive created book id?
-  - Fetch GET call with book id
-  - Update bookList
+  * Controlled Component in cardInfo
+  * Padding
+  * send PUT request to server
+  * Fetch GET call with book id
+  * Update bookList
 - Code Review
 - License
 - Production Build

@@ -10,10 +10,10 @@ class CardInfo extends Component {
     super(props)
 
     this.state = {
-      image: props.image,
-      title: props.title,
-      author: props.author,
-      releaseDate: props.releaseDate,
+      image: this.props.image,
+      title: this.props.title,
+      author: this.props.author,
+      releaseDate: this.props.releaseDate,
       showEditForm: false,
     };
 
@@ -83,9 +83,9 @@ class CardInfo extends Component {
       <div>
         {this.state.showEditForm ?
           <EditForm
-            title={this.props.title}
-            author={this.props.author}
-            releaseDate={this.props.releaseDate}
+            title={this.state.title}
+            author={this.state.author}
+            releaseDate={this.state.releaseDate}
             handleChange={this.handleChange}
           /> :
           <InfoTable

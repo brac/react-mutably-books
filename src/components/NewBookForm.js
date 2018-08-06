@@ -3,36 +3,11 @@
 import React, { Component } from 'react';
 
 class NewBookForm extends Component {
-  // constructor(props){
-    // super(props);
-    // this.state = {
-    //   title: '',
-    //   author: '',
-    //   image: '',
-    //   releaseDate: '',
-    // };
-
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-  // }
-
-  // handleChange(event) {
-  //   const name = event.target.name;
-  //   this.setState({
-  //     [name]: event.target.value
-  //   });
-  // }
-
-  // handleSubmit(event){
-  //   console.log('I will submit something!')
-  //   event.preventDefault();
-  // }
-
   render(){
     //jshint ignore:start
     return (
       <div className="container col">
-        <div className="conatiner border rounded">
+        <div className="conatiner border rounded p-4">
             <h4>Add a Book</h4>
             <form id="new-book-form" onSubmit={this.props.handleSubmit}>
               <div className="form-group">
