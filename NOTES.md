@@ -18,11 +18,18 @@ TODO:
   * send PUT request to server
   * Fetch GET call with book id
   * Update bookList
+* License
 - Code Review
-- License
+- README.md
 - Production Build
 - Deploy to Heroku
 
+
+How and when should I build for production?
+Do I need to use something like Bable and/or Webpack?
+
+# How did you deploy to heroku using the UI?
+All you have to do is log into your Heroku account; click “new” then “create new app” and give your app a name. After clicking create you should be greeted with a dashboard for the app you just created. Navigate to the deploy tab and sync your Github account with Heroku. After syncing your Github account and can search for the repository you want to sync with Heroku by scrolling down to “App connected to Github” section and searching for the repository you want to sync. You can also set up automatic deployment, so every time you push to the master branch Heroku will rebuild your app for you.
 
 # How did you get bootstrap to work with React?
 I installed both dependencies locally:
